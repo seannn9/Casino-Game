@@ -9,15 +9,27 @@ float betAmount() {
     return bet;
 }
 
-void guess(float bet) {
-    while (bet > 0) {
-        srand(time(0));
-        randNum = rand() % 10 + 1;
-    }
+int userGuess() {
+    int guess;
+    cout << "Input guess: ";
+    cin >> guess;
+    return guess;
 }
 
 int main() {
+    srand(time(0));
+    int randNum = rand()%10 + 1;
     float bet = betAmount();
-    guess(bet);
+    do {
+        if (userGuess() != randNum) {
+            bet -= (bet*0.10);
+            cout << bet << endl;
+        } else {
+            cout << "You guessed it" << endl;
+            bet += (bet*1.0);
+            break;
+        }
+    } while (bet > 0);
+    cout << bet << endl;
     return 0;
 }
